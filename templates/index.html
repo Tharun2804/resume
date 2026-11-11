@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Upload Resume & JD{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card p-4">
+            <h4 class="mb-4">Resume vs Job Description Analyzer</h4>
+            <form method="POST" action="/analyze" enctype="multipart/form-data" id="analyzeForm">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Upload Resume <span class="text-muted">(PDF or DOCX, max 5 MB)</span></label>
+                    <input type="file" name="resume" class="form-control" accept=".pdf,.docx" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Job Description</label>
+                    <textarea name="jd_text" class="form-control" rows="10"
+                        placeholder="Paste the full job description here..." required maxlength="8000"></textarea>
+                    <div class="form-text">Max 8,000 characters</div>
+                </div>
+                <button type="submit" class="btn btn-dark w-100" id="submitBtn">
+                    Analyze Match
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+document.getElementById("analyzeForm").addEventListener("submit", function() {
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Analyzing...';
+});
+</script>
+{% endblock %}
